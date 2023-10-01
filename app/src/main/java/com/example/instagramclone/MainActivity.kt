@@ -14,8 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 
-import com.example.instagramclone.ui.theme.InstagramCloneTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +25,21 @@ class MainActivity : ComponentActivity() {
 
         window.statusBarColor= Color.TRANSPARENT
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, SignUpActivity::class.java))
-            finish()
+            if(FirebaseAuth.getInstance().currentUser==null){
+                startActivity(Intent(this, SignUpActivity::class.java))
+
+            }
+            else{
+                startActivity(Intent(this,HomeActivity::class.java))
+                finish()
+            }
+
+
+
+
+
+
+
 
         },3000) //3 sec delay
 
